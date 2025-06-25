@@ -1,10 +1,13 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        cnt = 1
-        for i in range(len(nums)-1):
-            if nums[i] != nums[i+1]:
-                cnt +=1
-            else:
-                nums[i] = 101
-        nums.sort()
-        return cnt
+        if not nums:
+            return 0
+        
+        write = 1  # 중복이 아닌 값을 쓸 위치
+
+        for read in range(1, len(nums)):
+            if nums[read] != nums[write - 1]:
+                nums[write] = nums[read]
+                write += 1
+        
+        return write
